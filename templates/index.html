@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wine Quality Prediction App</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+  <link rel="stylesheet" href="{{url_for('static', filename='css/main.css')}}"></link>
+</head>
+<body>
+  <div class="container">
+    <div class="image-container">
+        <img src="{{ url_for('static', filename='../static/images/wine_image.jpg') }}" alt="Wine Image">
+    </div>
+    <div class="form-container">
+        <h1>Wine Quality Predictor</h1>
+        <form method="post">
+            <label for="type">Type:</label>
+            <input type="number" name="type" required>
+
+            <label for="fixed_acidity">Fixed Acidity:</label>
+            <input type="number" name="fixed_acidity" step="0.1" required>
+        
+            <label for="volatile_acidity">Volatile Acidity:</label>
+            <input type="number" name="volatile_acidity" step="0.01" required>
+        
+            <label for="citric_acid">Citric Acid:</label>
+            <input type="number" name="citric_acid" step="0.01" required>
+        
+            <label for="residual_sugar">Residual Sugar:</label>
+            <input type="number" name="residual_sugar" step="0.1" required>
+        
+            <label for="chlorides">Chlorides:</label>
+            <input type="number" name="chlorides" step="0.001" required>
+        
+            <label for="free_sulfur_dioxide">Free Sulfur Dioxide:</label>
+            <input type="number" name="free_sulfur_dioxide" required>
+        
+            <label for="density">Density:</label>
+            <input type="number" name="density" step="0.001" required>
+        
+            <label for="pH">pH:</label>
+            <input type="number" name="pH" step="0.01" required>
+        
+            <label for="sulphates">Sulphates:</label>
+            <input type="number" name="sulphates" step="0.01" required>
+        
+            <label for="alcohol">Alcohol:</label>
+            <input type="number" name="alcohol" step="0.1" required>
+        
+            <button type="submit">Predict</button>
+        </form>        
+        {% if prediction %}
+                <p class="prediction">Predicted Quality: {{ prediction }}</p>
+        {% endif %}
+    </div>
+  </div>
+</body>
+</html>
