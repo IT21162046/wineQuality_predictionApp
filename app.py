@@ -2,8 +2,11 @@ from flask import Flask, render_template, request
 import pickle
 import pandas as pd
 from sklearn.preprocessing import MinMaxScaler
+from logger import logging
 
 app = Flask(__name__)
+
+logging.info('Flask server started')
 
 # Load the trained logistic regression model and MinMaxScaler
 with open('static/model/model.pickle', 'rb') as file:
