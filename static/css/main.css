@@ -1,17 +1,13 @@
 body {
   font-family: Arial, sans-serif;
-  background-color: #f2f2f2;
+  /* background-color: #f2f2f2; */
   margin: 0;
+  background-image: url('../images/wine_image2.jpg');
 }
 
 .container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  display: contents;
   height: 100vh;
-  flex-wrap: wrap;
-  align-content: flex-start;
-  flex-direction: row;
 }
 
 .image-container {
@@ -20,21 +16,25 @@ body {
 }
 
 .image-container img {
-  width: 75%;
-  height: 75;
+  max-width: 100%;
+  height: auto;
 }
 
 .form-container {
-  flex: 1;
   background-color: #fff;
   padding: 20px;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin: 100px 400px 100px 400px;
+  opacity: 0.9;
 }
 
 h1 {
   text-align: center;
   color: #333;
+  margin-bottom: 75px;
+  font-family: inherit;
+  font-size: -webkit-xxx-large;
 }
 
 form {
@@ -63,4 +63,9 @@ button {
 .prediction {
   margin-top: 16px;
   font-weight: bold;
+  margin-top: 50px;
+  text-align: center;
+  color: red;
+  font-size: x-large;
+  font-family: system-ui;
 }

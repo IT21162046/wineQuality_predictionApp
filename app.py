@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request
 import pickle
 import pandas as pd
+import plotly.express as px
 from sklearn.preprocessing import MinMaxScaler
 from logger import logging
 
@@ -36,6 +37,13 @@ def make_single_prediction(model, scaler, input_features):
   return prediction_label
 
 
+def create_feature_chart(input_features):
+    # Create a bar chart for input feature values
+    fig = px.bar(x=list(input_features.keys()), y=list(input_features.values()), labels={'x': 'Feature', 'y': 'Value'})
+    graph_json = fig.to_json()
+    return graph_json
+
+
 @app.route("/", methods=["GET", "POST"])
 def index():
     if request.method == "POST":
@@ -54,9 +62,13 @@ def index():
         }
 
         prediction = make_single_prediction(logistic_model, norm, user_inputs)
-        return render_template("index.html", prediction=prediction)
 
-    return render_template("index.html", prediction=None)
+        # Create a bar chart for input feature values
+        graph_json = create_feature_chart(user_inputs)
+
+        return render_template("index.html", prediction=prediction, graph_json=graph_json)
+
+    return render_template("index.html", prediction=None, graph_json=None)
 
 
 
