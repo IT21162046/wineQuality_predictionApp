@@ -51,6 +51,11 @@ input {
   margin-bottom: 16px;
 }
 
+select {
+  padding: 8px;
+  margin-bottom: 16px;
+}
+
 button {
   background-color: #007bff;
   color: #fff;

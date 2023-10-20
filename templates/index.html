@@ -16,8 +16,13 @@
     <div class="form-container">
         <h1>Wine Quality Predictor</h1>
         <form method="post">
-            <label for="type">Type(0 - White, 1 - Red):</label>
-            <input type="number" name="type" required>
+            <label for="type">Wine Type:</label>
+            <!-- <input type="number" name="type" required> -->
+            <select name="type" id="type" required>
+              <option value="">Select wine type</option>
+              <option value="0">White</option>
+              <option value="1">Red</option>
+            </select>
 
             <label for="fixed_acidity">Fixed Acidity:</label>
             <input type="number" name="fixed_acidity" step="0.1" required>
