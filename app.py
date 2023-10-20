@@ -2,6 +2,11 @@ from flask import Flask, render_template, request
 import pickle
 import pandas as pd
 import plotly.express as px
+# import plotly.figure_factory as ff
+# import numpy as np
+import plotly.graph_objs as go
+# from sklearn.metrics import confusion_matrix, classification_report, roc_curve, auc
+# from sklearn.metrics import roc_auc_score
 from sklearn.preprocessing import MinMaxScaler
 from logger import logging
 
@@ -43,6 +48,44 @@ def create_feature_chart(input_features):
     graph_json = fig.to_json()
     return graph_json
 
+# def create_correlation_heatmap(corr_matrix, column_names):
+#     fig = ff.create_annotated_heatmap(z=corr_matrix, x=column_names, y=column_names)
+#     graph_json = fig.to_json()
+#     return graph_json
+
+# def create_scatter_plot(data, x_feature, y_feature, color_feature):
+#     fig = px.scatter(data, x=x_feature, y=y_feature, color=color_feature)
+#     graph_json = fig.to_json()
+#     return graph_json
+
+# def create_model_metrics(y_true, y_pred_prob):
+#     auc_score = roc_auc_score(y_true, y_pred_prob) 
+
+#     # Convert the list of probabilities to a list of 0s and 1s based on a threshold
+#     threshold = 0.5
+#     y_pred = [1 if prob > threshold else 0 for prob in y_pred_prob]
+
+#     cm = confusion_matrix(y_true, y_pred)
+#     report = classification_report(y_true, y_pred)
+
+#     return {
+#         'auc_score': auc_score,
+#         'confusion_matrix': cm,
+#         'classification_report': report
+#     }
+
+def create_line_chart(input_data):
+    x_values = list(input_data.keys())
+    y_values = list(input_data.values())
+
+    trace = go.Scatter(x=x_values, y=y_values, mode='lines+markers', name='User Inputs')
+    data = [trace]
+    layout = go.Layout(xaxis=dict(title='Features'), yaxis=dict(title='Values'))
+    fig = go.Figure(data=data, layout=layout)
+    graph_json = fig.to_json()
+    return graph_json
+
+
 
 @app.route("/", methods=["GET", "POST"])
 def index():
@@ -61,15 +104,35 @@ def index():
             'alcohol': float(request.form['alcohol'])
         }
 
+        # Sample dataset for correlation heatmap and scatter plot
+        # data = pd.DataFrame(user_inputs, index=[0])
+
+        # correlation_matrix = data.corr().to_numpy()
+        # column_names = data.columns.tolist()
+
         prediction = make_single_prediction(logistic_model, norm, user_inputs)
 
         # Create a bar chart for input feature values
         graph_json = create_feature_chart(user_inputs)
 
-        return render_template("index.html", prediction=prediction, graph_json=graph_json)
+        # Create a correlation heatmap
+        # correlation_heatmap = create_correlation_heatmap(correlation_matrix, column_names)
 
-    return render_template("index.html", prediction=None, graph_json=None)
+        # Create a scatter plot
+        # scatter_plot = create_scatter_plot(data, x_feature='alcohol', y_feature='fixed acidity', color_feature='type')
 
+        # # Sample model metrics
+        # y_true = [0, 1, 1, 0, 0]  # True labels
+        # y_pred_prob = [0.2, 0.8, 0.7, 0.3, 0.1]  # Predicted probabilities
+
+        # model_metrics = create_model_metrics(y_true, y_pred_prob)
+
+        # Create a line chart
+        line_chart = create_line_chart(user_inputs)
+
+        return render_template("index.html", prediction=prediction, graph_json=graph_json, line_chart=line_chart)
+
+    return render_template("index.html", prediction=None, graph_json=None, line_chart = None)
 
 
 if __name__ == "__main__":

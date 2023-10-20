@@ -10,9 +10,16 @@
 </head>
 <body>
   <div class="container">
-    <!-- <div class="image-container">
-        <img src="{{ url_for('static', filename='../static/images/wine_image2.jpg') }}" alt="Wine Image">
-    </div> -->
+    <div class="info-container">
+      <h2>About the App</h2>
+      <p>This Wine Quality Prediction App allows you to predict the quality of wine based on various input parameters. Select the wine type and enter the required information to get predictions.</p>
+      <br>
+      <div class="image-container">
+        <img src="../static/images/wineimg.jpg" alt="Image 1">
+        <img src="../static/images/wineimg2.jpg" alt="Image 2">
+        <img src="../static/images/wineimg3.jpg" alt="Image 3">
+      </div>
+    </div>
     <div class="form-container">
         <h1>Wine Quality Predictor</h1>
         <form method="post">
@@ -57,11 +64,28 @@
             <button type="submit">Predict</button>
         </form>        
         {% if prediction %}
-                <p class="prediction">Predicted Quality:&nbsp&nbsp&nbsp "{{ prediction }}"</p>
-                <div id="feature-chart" style="height: 400px;"></div>
+                
+                <p class="prediction">Predicted Quality:&nbsp&nbsp "{{ prediction }}"</p>
+                <div class="chart-container">
+                  <div id="feature-chart" style="height: 400px;"></div>
+                </div>
+                
+                {% if line_chart %}
+                <div class="chart-container">
+                    <div id="line-chart"></div>
+                </div>
+                {% endif %}
                 <script>
+                    // Convert the JSON strings to JavaScript objects
                     var graphJSON = {{ graph_json | safe }};
+                    
+                    var lineChartJSON = {{ line_chart | safe }};
+                    var lineChart = document.getElementById('line-chart');
+
+                    // Use Plotly.react to create the plots
                     Plotly.newPlot('feature-chart', graphJSON);
+                   
+                    Plotly.newPlot(lineChart, lineChartJSON);
                 </script>
         {% endif %}
     </div>

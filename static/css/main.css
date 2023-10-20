@@ -1,41 +1,61 @@
 body {
   font-family: Arial, sans-serif;
-  /* background-color: #f2f2f2; */
+  background-color: #f2f2f2;
   margin: 0;
-  background-image: url('../images/wine_image2.jpg');
+  /* background-image: url('../images/wine_image2.jpg'); */
+  background-size: cover;
 }
 
 .container {
-  display: contents;
-  height: 100vh;
+  /* display: contents; */
+  /* height: 100vh; */
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+  background-image: url('../images/backimg.jpg');
+  /* background-color: #C9D5D1; */
 }
 
-.image-container {
+/* .image-container {
   flex: 1;
   margin-right: 20px;
-}
+} */
 
-.image-container img {
+/* .image-container img {
   max-width: 100%;
   height: auto;
+} */
+
+.info-container {
+  flex: 1;
+  background-color: rgba(255, 255, 255, 0.9);
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  /* background-image: url('../images/background3.jpg'); */
 }
 
 .form-container {
-  background-color: #fff;
+  background-image: url('../images/backimg.jpg');
+  /* background-color: #fff; */
+  flex: 2;
+  background-color: rgba(255, 255, 255, 0.9);
   padding: 20px;
-  border-radius: 8px;
+  /* border-radius: 8px; */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  margin: 100px 400px 100px 400px;
-  opacity: 0.9;
+  /* margin: 100px 400px 100px 400px;
+  opacity: 0.9; */
 }
 
 h1 {
   text-align: center;
   color: #333;
-  margin-bottom: 75px;
+  /* margin-bottom: 75px; */
   font-family: inherit;
   font-size: -webkit-xxx-large;
+  margin-bottom: 30px;
+  /* font-size: 24px; */
 }
+
 
 form {
   display: flex;
@@ -66,11 +86,29 @@ button {
 }
 
 .prediction {
-  margin-top: 16px;
+  /* margin-top: 16px; */
   font-weight: bold;
-  margin-top: 50px;
+  /* margin-top: 50px; */
   text-align: center;
-  color: red;
-  font-size: x-large;
-  font-family: system-ui;
+  color: rgb(31, 33, 77);
+  font-size: xx-large;
+  font-family: 10px system-ui;
+  margin-top: 50px;
+  margin-bottom: 50px;
+  -webkit-text-stroke: 1px rgb(255, 255, 255);
+  /* text-decoration: underline; */
+}
+
+.chart-container {
+  margin: 20px;
+  padding: 20px;
+  border: 1px solid #ccc;
+}
+
+.image-container img {
+  width: 80%;
+  height: auto;
+  margin-bottom: 20px;
+  margin-top: 20px;
+  margin-left: 10%;
 }
